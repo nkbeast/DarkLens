@@ -1,4 +1,4 @@
-from modules import check
+from modules import check,cloudflare_check
 check.dependency()
 check.check_started()
 from colorama import Back,Fore,Style
