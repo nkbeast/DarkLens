@@ -41,3 +41,11 @@
 - macOS Big Sur / M1
 - Termux (android)
   <br>
+
+### Installaion
+
+- git clone https://github.com/nkbeast/DarkLens.git
+- cd DarkLens
+- pip install requirements.txt
+- python3 lens.py
+  <br>
