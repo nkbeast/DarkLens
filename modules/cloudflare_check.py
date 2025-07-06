@@ -32,9 +32,17 @@ else:
 
     if "arm" in arch or "android" in arch:
         download("https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm", "cloudflared")
+        print("Run Script Again")
+        exit()
     elif "aarch64" in arch:
         download("https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64", "cloudflared")
+        print("Run Script Again")
+        exit()
     elif "x86_64" in arch:
         download("https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64", "cloudflared")
+        print("Run Script Again")
+        exit()
     else:
         download("https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-386", "cloudflared")
+        print("Run Script Again")
+        exit()
